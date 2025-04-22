@@ -1,0 +1,74 @@
+version 3
+run Handover-General-0-20250418-20:35:00-2210
+attr configname Handover-General
+attr datetime 20250418-20:35:00
+attr datetimef 20250418-203500
+attr experiment Handover-General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network simu5g.simulations.LTE.networks.MultiCell
+attr processid 2210
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../../images:../../../../inet4.4/images:../../../../veins_inet/images:../../../../veins-veins-5.2/images
+config **.ue1*.macCellId 1
+config **.ue1*.masterId 1
+config **.ue2*.macCellId 2
+config **.ue2*.masterId 2
+config **.cellularNic.phy.enableHandover true
+config *.eNodeB*.numX2Apps 1
+config *.eNodeB*.x2App[*].server.localPort "5000 + ancestorIndex(1)"
+config *.eNodeB1.x2App[0].client.connectAddress "\"eNodeB2%x2ppp0\""
+config *.eNodeB2.x2App[0].client.connectAddress "\"eNodeB1%x2ppp0\""
+config **.mobility.initFromDisplayString false
+config *.eNodeB1.mobility.initialX 300m
+config *.eNodeB1.mobility.initialY 250m
+config *.eNodeB2.mobility.initialX 400m
+config *.eNodeB2.mobility.initialY 250m
+config *.ue11.mobility.initialX 350m
+config *.ue11.mobility.initialY 280m
+config *.ue11.mobility.speed 10mps
+config *.ue11.mobility.initialMovementHeading 0deg
+config *.ue11.mobility.typename LinearMobility
+config *.ue11.mobility.constraintAreaMinX 250m
+config *.ue11.mobility.constraintAreaMaxX 450m
+config *.ue12.mobility.initialX 320m
+config *.ue12.mobility.initialY 280m
+config *.ue12.mobility.speed 10mps
+config *.ue12.mobility.initialMovementHeading 0deg
+config *.ue12.mobility.typename LinearMobility
+config *.ue12.mobility.constraintAreaMinX 250m
+config *.ue12.mobility.constraintAreaMaxX 450m
+config *.ue*.mobility.constraintAreaMaxX 750m
+config *.ue*.mobility.constraintAreaMaxY 400m
+config *.ue*.mobility.constraintAreaMinX 50m
+config *.ue*.mobility.constraintAreaMinY 100m
+config *.ue2*.mobility.initialX uniform(450m,750m)
+config *.ue2*.mobility.initialY uniform(100m,400m)
+config *.ue*.mobility.initialZ 0m
+config **.eNodeB*.cellularNic.phy.targetBler 0.004
+config image-path ../../images
+config output-scalar-file-append false
+config sim-time-limit 20s
+config network simu5g.simulations.LTE.networks.MultiCell
+config **.routingRecorder.enabled false
+config **.vector-recording true
+config **.cellularNic.channelModel[0].shadowing false
+config **.cellularNic.channelModel[0].fading false
+config **.mobility.constraintAreaMinZ 0m
+config **.mobility.constraintAreaMaxZ 0m
+config **.mobility.initFromDisplayString true
+config **.numBands 25
+config **.ueTxPower 26
+config **.eNodeBTxPower 40
+config *.configurator.config "xmldoc(\"./demo.xml\")"
+config **.hasRNISupport false
+
+scalar MultiCell.eNodeB1.x2App[0].client ums 1452
+scalar MultiCell.eNodeB2.x2App[0].client ums 1452

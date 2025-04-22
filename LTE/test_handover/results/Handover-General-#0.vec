@@ -1,0 +1,1350 @@
+version 3
+run Handover-General-0-20250418-20:35:00-2210
+attr configname Handover-General
+attr datetime 20250418-20:35:00
+attr datetimef 20250418-203500
+attr experiment Handover-General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network simu5g.simulations.LTE.networks.MultiCell
+attr processid 2210
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../../images:../../../../inet4.4/images:../../../../veins_inet/images:../../../../veins-veins-5.2/images
+config **.ue1*.macCellId 1
+config **.ue1*.masterId 1
+config **.ue2*.macCellId 2
+config **.ue2*.masterId 2
+config **.cellularNic.phy.enableHandover true
+config *.eNodeB*.numX2Apps 1
+config *.eNodeB*.x2App[*].server.localPort "5000 + ancestorIndex(1)"
+config *.eNodeB1.x2App[0].client.connectAddress "\"eNodeB2%x2ppp0\""
+config *.eNodeB2.x2App[0].client.connectAddress "\"eNodeB1%x2ppp0\""
+config **.mobility.initFromDisplayString false
+config *.eNodeB1.mobility.initialX 300m
+config *.eNodeB1.mobility.initialY 250m
+config *.eNodeB2.mobility.initialX 400m
+config *.eNodeB2.mobility.initialY 250m
+config *.ue11.mobility.initialX 350m
+config *.ue11.mobility.initialY 280m
+config *.ue11.mobility.speed 10mps
+config *.ue11.mobility.initialMovementHeading 0deg
+config *.ue11.mobility.typename LinearMobility
+config *.ue11.mobility.constraintAreaMinX 250m
+config *.ue11.mobility.constraintAreaMaxX 450m
+config *.ue12.mobility.initialX 320m
+config *.ue12.mobility.initialY 280m
+config *.ue12.mobility.speed 10mps
+config *.ue12.mobility.initialMovementHeading 0deg
+config *.ue12.mobility.typename LinearMobility
+config *.ue12.mobility.constraintAreaMinX 250m
+config *.ue12.mobility.constraintAreaMaxX 450m
+config *.ue*.mobility.constraintAreaMaxX 750m
+config *.ue*.mobility.constraintAreaMaxY 400m
+config *.ue*.mobility.constraintAreaMinX 50m
+config *.ue*.mobility.constraintAreaMinY 100m
+config *.ue2*.mobility.initialX uniform(450m,750m)
+config *.ue2*.mobility.initialY uniform(100m,400m)
+config *.ue*.mobility.initialZ 0m
+config **.eNodeB*.cellularNic.phy.targetBler 0.004
+config image-path ../../images
+config output-scalar-file-append false
+config sim-time-limit 20s
+config network simu5g.simulations.LTE.networks.MultiCell
+config **.routingRecorder.enabled false
+config **.vector-recording true
+config **.cellularNic.channelModel[0].shadowing false
+config **.cellularNic.channelModel[0].fading false
+config **.mobility.constraintAreaMinZ 0m
+config **.mobility.constraintAreaMaxZ 0m
+config **.mobility.initFromDisplayString true
+config **.numBands 25
+config **.ueTxPower 26
+config **.eNodeBTxPower 40
+config *.configurator.config "xmldoc(\"./demo.xml\")"
+config **.hasRNISupport false
+
+vector 0 MultiCell.server.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 1 MultiCell.server.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 2 MultiCell.server.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 3 MultiCell.server.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 4 MultiCell.pgw.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 5 MultiCell.pgw.ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 6 MultiCell.pgw.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 7 MultiCell.pgw.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 8 MultiCell.pgw.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 9 MultiCell.pgw.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 10 MultiCell.router.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 11 MultiCell.router.ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 12 MultiCell.eNodeB1.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 13 MultiCell.eNodeB1.x2ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 14 MultiCell.eNodeB1.pppMEHostIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 15 MultiCell.eNodeB1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 16 MultiCell.eNodeB1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 17 MultiCell.eNodeB1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 18 MultiCell.eNodeB2.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 19 MultiCell.eNodeB2.x2ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 20 MultiCell.eNodeB2.pppMEHostIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 21 MultiCell.eNodeB2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 22 MultiCell.eNodeB2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 23 MultiCell.eNodeB2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 24 MultiCell.ue11.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 25 MultiCell.ue11.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 26 MultiCell.ue11.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 27 MultiCell.ue12.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 28 MultiCell.ue12.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 29 MultiCell.ue12.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 30 MultiCell.ue21.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 31 MultiCell.ue21.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 32 MultiCell.ue21.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 33 MultiCell.ue22.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 34 MultiCell.ue22.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 35 MultiCell.ue22.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 36 MultiCell.ue11.cellularNic.phy servingCell:vector ETV
+attr recordingmode vector
+attr source servingCell
+attr title "ID of the serving eNodeB for the UE"
+attr unit ""
+vector 37 MultiCell.ue12.cellularNic.phy servingCell:vector ETV
+attr recordingmode vector
+attr source servingCell
+attr title "ID of the serving eNodeB for the UE"
+attr unit ""
+vector 38 MultiCell.ue21.cellularNic.phy servingCell:vector ETV
+attr recordingmode vector
+attr source servingCell
+attr title "ID of the serving eNodeB for the UE"
+attr unit ""
+vector 39 MultiCell.ue22.cellularNic.phy servingCell:vector ETV
+attr recordingmode vector
+attr source servingCell
+attr title "ID of the serving eNodeB for the UE"
+attr unit ""
+vector 40 MultiCell.eNodeB1.sctp "Throughput of Association 27" ETV
+vector 41 MultiCell.eNodeB2.sctp "Throughput of Association 28" ETV
+vector 42 MultiCell.eNodeB1.sctp "Throughput of Association 4" ETV
+vector 43 MultiCell.eNodeB1.sctp "Fast Recovery State 4:10.0.5.2" ETV
+vector 44 MultiCell.eNodeB2.sctp "Throughput of Association 8" ETV
+vector 45 MultiCell.eNodeB2.sctp "Fast Recovery State 8:10.0.5.1" ETV
+vector 46 MultiCell.eNodeB1.x2ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 47 MultiCell.eNodeB1.x2ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 48 MultiCell.eNodeB1.x2ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 49 MultiCell.eNodeB1.x2ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 50 MultiCell.eNodeB1.x2ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 51 MultiCell.eNodeB1.x2ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 52 MultiCell.eNodeB2.x2ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 53 MultiCell.eNodeB2.x2ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 54 MultiCell.eNodeB2.x2ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 55 MultiCell.eNodeB2.x2ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 56 MultiCell.eNodeB2.x2ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 57 MultiCell.eNodeB2.x2ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 58 MultiCell.ue11.cellularNic.channelModel[0] distance:vector ETV
+attr recordingmode vector
+attr source distance
+attr title "distance between UE and serving base station"
+attr unit meters
+vector 59 MultiCell.ue12.cellularNic.channelModel[0] distance:vector ETV
+attr recordingmode vector
+attr source distance
+attr title "distance between UE and serving base station"
+attr unit meters
+vector 60 MultiCell.ue21.cellularNic.channelModel[0] distance:vector ETV
+attr recordingmode vector
+attr source distance
+attr title "distance between UE and serving base station"
+attr unit meters
+vector 61 MultiCell.ue22.cellularNic.channelModel[0] distance:vector ETV
+attr recordingmode vector
+attr source distance
+attr title "distance between UE and serving base station"
+attr unit meters
+vector 62 MultiCell.eNodeB2.x2ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 63 MultiCell.eNodeB2.x2ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 64 MultiCell.eNodeB1.x2ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 65 MultiCell.eNodeB1.x2ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 66 MultiCell.eNodeB2.sctp "Throughput of Association 28" ETV
+vector 67 MultiCell.eNodeB2.sctp "Peer Rwnd 28" ETV
+vector 68 MultiCell.eNodeB2.sctp "Fast Recovery State 29:10.0.4.1" ETV
+vector 69 MultiCell.eNodeB2.sctp "Fast Recovery State 29:10.0.1.2" ETV
+vector 70 MultiCell.eNodeB2.sctp "Fast Recovery State 29:10.0.5.1" ETV
+vector 71 MultiCell.eNodeB2.sctp "Fast Recovery State 29:10.0.6.1" ETV
+vector 72 MultiCell.eNodeB1.sctp "Throughput of Association 27" ETV
+vector 73 MultiCell.eNodeB1.sctp "Peer Rwnd 27" ETV
+vector 74 MultiCell.eNodeB1.sctp "Fast Recovery State 30:10.0.4.2" ETV
+vector 75 MultiCell.eNodeB1.sctp "Fast Recovery State 30:10.0.2.2" ETV
+vector 76 MultiCell.eNodeB1.sctp "Fast Recovery State 30:10.0.5.2" ETV
+vector 77 MultiCell.eNodeB1.sctp "Fast Recovery State 30:10.0.7.1" ETV
+vector 78 MultiCell.eNodeB1.sctp "Peer Rwnd 4" ETV
+vector 79 MultiCell.eNodeB1.sctp "Fast Recovery State 4:10.0.4.2" ETV
+vector 80 MultiCell.eNodeB1.sctp "Fast Recovery State 4:10.0.2.2" ETV
+vector 81 MultiCell.eNodeB1.sctp "Fast Recovery State 4:10.0.7.1" ETV
+vector 82 MultiCell.eNodeB2.sctp "Peer Rwnd 8" ETV
+vector 83 MultiCell.eNodeB2.sctp "Fast Recovery State 8:10.0.4.1" ETV
+vector 84 MultiCell.eNodeB2.sctp "Fast Recovery State 8:10.0.1.2" ETV
+vector 85 MultiCell.eNodeB2.sctp "Fast Recovery State 8:10.0.6.1" ETV
+vector 86 MultiCell.eNodeB2.sctp "Slow Start Threshold 29:10.0.1.2" ETV
+vector 87 MultiCell.eNodeB2.sctp "Congestion Window 29:10.0.1.2" ETV
+vector 88 MultiCell.eNodeB2.sctp "Bandwidth 29:10.0.1.2" ETV
+vector 89 MultiCell.eNodeB2.sctp "HB Sent 29:10.0.1.2" ETV
+vector 90 MultiCell.eNodeB2.sctp "RTO 29:10.0.1.2" ETV
+vector 91 MultiCell.eNodeB2.sctp "Slow Start Threshold 29:10.0.4.1" ETV
+vector 92 MultiCell.eNodeB2.sctp "Congestion Window 29:10.0.4.1" ETV
+vector 93 MultiCell.eNodeB2.sctp "Bandwidth 29:10.0.4.1" ETV
+vector 94 MultiCell.eNodeB2.sctp "HB Sent 29:10.0.4.1" ETV
+vector 95 MultiCell.eNodeB2.sctp "RTO 29:10.0.4.1" ETV
+vector 96 MultiCell.eNodeB2.sctp "Slow Start Threshold 29:10.0.5.1" ETV
+vector 97 MultiCell.eNodeB2.sctp "Congestion Window 29:10.0.5.1" ETV
+vector 98 MultiCell.eNodeB2.sctp "Bandwidth 29:10.0.5.1" ETV
+vector 99 MultiCell.eNodeB2.sctp "RTO 29:10.0.5.1" ETV
+vector 100 MultiCell.eNodeB2.sctp "Slow Start Threshold 29:10.0.6.1" ETV
+vector 101 MultiCell.eNodeB2.sctp "Congestion Window 29:10.0.6.1" ETV
+vector 102 MultiCell.eNodeB2.sctp "Bandwidth 29:10.0.6.1" ETV
+vector 103 MultiCell.eNodeB2.sctp "HB Sent 29:10.0.6.1" ETV
+vector 104 MultiCell.eNodeB2.sctp "RTO 29:10.0.6.1" ETV
+vector 105 MultiCell.eNodeB1.sctp "Slow Start Threshold 30:10.0.2.2" ETV
+vector 106 MultiCell.eNodeB1.sctp "Congestion Window 30:10.0.2.2" ETV
+vector 107 MultiCell.eNodeB1.sctp "Bandwidth 30:10.0.2.2" ETV
+vector 108 MultiCell.eNodeB1.sctp "HB Sent 30:10.0.2.2" ETV
+vector 109 MultiCell.eNodeB1.sctp "RTO 30:10.0.2.2" ETV
+vector 110 MultiCell.eNodeB1.sctp "Slow Start Threshold 30:10.0.4.2" ETV
+vector 111 MultiCell.eNodeB1.sctp "Congestion Window 30:10.0.4.2" ETV
+vector 112 MultiCell.eNodeB1.sctp "Bandwidth 30:10.0.4.2" ETV
+vector 113 MultiCell.eNodeB1.sctp "HB Sent 30:10.0.4.2" ETV
+vector 114 MultiCell.eNodeB1.sctp "RTO 30:10.0.4.2" ETV
+vector 115 MultiCell.eNodeB1.sctp "Slow Start Threshold 30:10.0.5.2" ETV
+vector 116 MultiCell.eNodeB1.sctp "Congestion Window 30:10.0.5.2" ETV
+vector 117 MultiCell.eNodeB1.sctp "Bandwidth 30:10.0.5.2" ETV
+vector 118 MultiCell.eNodeB1.sctp "RTO 30:10.0.5.2" ETV
+vector 119 MultiCell.eNodeB1.sctp "Slow Start Threshold 30:10.0.7.1" ETV
+vector 120 MultiCell.eNodeB1.sctp "Congestion Window 30:10.0.7.1" ETV
+vector 121 MultiCell.eNodeB1.sctp "Bandwidth 30:10.0.7.1" ETV
+vector 122 MultiCell.eNodeB1.sctp "HB Sent 30:10.0.7.1" ETV
+vector 123 MultiCell.eNodeB1.sctp "RTO 30:10.0.7.1" ETV
+vector 124 MultiCell.eNodeB1.sctp "HB ACK Sent 4:10.0.5.2" ETV
+vector 125 MultiCell.eNodeB1.sctp "HB Received 4:10.0.5.2" ETV
+vector 126 MultiCell.eNodeB2.sctp "HB ACK Sent 8:10.0.5.1" ETV
+vector 127 MultiCell.eNodeB2.sctp "HB Received 8:10.0.5.1" ETV
+vector 128 MultiCell.eNodeB1.sctp "Slow Start Threshold 4:10.0.2.2" ETV
+vector 129 MultiCell.eNodeB1.sctp "Congestion Window 4:10.0.2.2" ETV
+vector 130 MultiCell.eNodeB1.sctp "Bandwidth 4:10.0.2.2" ETV
+vector 131 MultiCell.eNodeB1.sctp "HB Sent 4:10.0.2.2" ETV
+vector 132 MultiCell.eNodeB1.sctp "RTO 4:10.0.2.2" ETV
+vector 133 MultiCell.eNodeB1.sctp "Slow Start Threshold 4:10.0.4.2" ETV
+vector 134 MultiCell.eNodeB1.sctp "Congestion Window 4:10.0.4.2" ETV
+vector 135 MultiCell.eNodeB1.sctp "Bandwidth 4:10.0.4.2" ETV
+vector 136 MultiCell.eNodeB1.sctp "HB Sent 4:10.0.4.2" ETV
+vector 137 MultiCell.eNodeB1.sctp "RTO 4:10.0.4.2" ETV
+vector 138 MultiCell.eNodeB1.sctp "Slow Start Threshold 4:10.0.5.2" ETV
+vector 139 MultiCell.eNodeB1.sctp "Congestion Window 4:10.0.5.2" ETV
+vector 140 MultiCell.eNodeB1.sctp "Bandwidth 4:10.0.5.2" ETV
+vector 141 MultiCell.eNodeB1.sctp "RTO 4:10.0.5.2" ETV
+vector 142 MultiCell.eNodeB1.sctp "Slow Start Threshold 4:10.0.7.1" ETV
+vector 143 MultiCell.eNodeB1.sctp "Congestion Window 4:10.0.7.1" ETV
+vector 144 MultiCell.eNodeB1.sctp "Bandwidth 4:10.0.7.1" ETV
+vector 145 MultiCell.eNodeB1.sctp "HB Sent 4:10.0.7.1" ETV
+vector 146 MultiCell.eNodeB1.sctp "RTO 4:10.0.7.1" ETV
+vector 147 MultiCell.eNodeB2.sctp "Slow Start Threshold 8:10.0.1.2" ETV
+vector 148 MultiCell.eNodeB2.sctp "Congestion Window 8:10.0.1.2" ETV
+vector 149 MultiCell.eNodeB2.sctp "Bandwidth 8:10.0.1.2" ETV
+vector 150 MultiCell.eNodeB2.sctp "HB Sent 8:10.0.1.2" ETV
+vector 151 MultiCell.eNodeB2.sctp "RTO 8:10.0.1.2" ETV
+vector 152 MultiCell.eNodeB2.sctp "Slow Start Threshold 8:10.0.4.1" ETV
+vector 153 MultiCell.eNodeB2.sctp "Congestion Window 8:10.0.4.1" ETV
+vector 154 MultiCell.eNodeB2.sctp "Bandwidth 8:10.0.4.1" ETV
+vector 155 MultiCell.eNodeB2.sctp "HB Sent 8:10.0.4.1" ETV
+vector 156 MultiCell.eNodeB2.sctp "RTO 8:10.0.4.1" ETV
+vector 157 MultiCell.eNodeB2.sctp "Slow Start Threshold 8:10.0.5.1" ETV
+vector 158 MultiCell.eNodeB2.sctp "Congestion Window 8:10.0.5.1" ETV
+vector 159 MultiCell.eNodeB2.sctp "Bandwidth 8:10.0.5.1" ETV
+vector 160 MultiCell.eNodeB2.sctp "RTO 8:10.0.5.1" ETV
+vector 161 MultiCell.eNodeB2.sctp "Slow Start Threshold 8:10.0.6.1" ETV
+vector 162 MultiCell.eNodeB2.sctp "Congestion Window 8:10.0.6.1" ETV
+vector 163 MultiCell.eNodeB2.sctp "Bandwidth 8:10.0.6.1" ETV
+vector 164 MultiCell.eNodeB2.sctp "HB Sent 8:10.0.6.1" ETV
+vector 165 MultiCell.eNodeB2.sctp "RTO 8:10.0.6.1" ETV
+vector 166 MultiCell.eNodeB1.sctp "HB ACK Received 30:10.0.5.2" ETV
+vector 167 MultiCell.eNodeB1.sctp "RTT 30:10.0.5.2" ETV
+vector 168 MultiCell.eNodeB2.sctp "HB ACK Received 29:10.0.5.1" ETV
+vector 169 MultiCell.eNodeB2.sctp "RTT 29:10.0.5.1" ETV
+vector 170 MultiCell.eNodeB1.sctp "HB ACK Sent 30:10.0.5.2" ETV
+vector 171 MultiCell.eNodeB1.sctp "HB Received 30:10.0.5.2" ETV
+vector 172 MultiCell.eNodeB2.sctp "HB ACK Sent 29:10.0.5.1" ETV
+vector 173 MultiCell.eNodeB2.sctp "HB Received 29:10.0.5.1" ETV
+vector 174 MultiCell.eNodeB1.sctp "HB ACK Received 4:10.0.5.2" ETV
+vector 175 MultiCell.eNodeB1.sctp "RTT 4:10.0.5.2" ETV
+vector 176 MultiCell.eNodeB2.sctp "HB ACK Received 8:10.0.5.1" ETV
+vector 177 MultiCell.eNodeB2.sctp "RTT 8:10.0.5.1" ETV
+vector 178 MultiCell.eNodeB1.cellularNic.mac avgServedBlocksUl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksUl
+attr title "Avg Served Blocks Ul"
+attr unit blocks
+vector 179 MultiCell.eNodeB1.cellularNic.mac avgServedBlocksDl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksDl
+attr title "Avg Served Blocks Dl"
+attr unit blocks
+vector 180 MultiCell.eNodeB2.cellularNic.mac avgServedBlocksUl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksUl
+attr title "Avg Served Blocks Ul"
+attr unit blocks
+vector 181 MultiCell.eNodeB2.cellularNic.mac avgServedBlocksDl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksDl
+attr title "Avg Served Blocks Dl"
+attr unit blocks
+vector 182 MultiCell.ue11.cellularNic.channelModel[0] measuredSinrUl:vector ETV
+attr recordingmode vector
+attr source measuredSinrUl
+attr title "SINR measured at feedback computation, UL"
+attr unit dB
+vector 183 MultiCell.ue11.cellularNic.channelModel[0] measuredSinrDl:vector ETV
+attr recordingmode vector
+attr source measuredSinrDl
+attr title "SINR measured at feedback computation, DL"
+attr unit dB
+vector 184 MultiCell.eNodeB1.cellularNic.mac receivedPacketFromLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromLowerLayer
+vector 185 MultiCell.ue12.cellularNic.channelModel[0] measuredSinrUl:vector ETV
+attr recordingmode vector
+attr source measuredSinrUl
+attr title "SINR measured at feedback computation, UL"
+attr unit dB
+vector 186 MultiCell.ue12.cellularNic.channelModel[0] measuredSinrDl:vector ETV
+attr recordingmode vector
+attr source measuredSinrDl
+attr title "SINR measured at feedback computation, DL"
+attr unit dB
+vector 187 MultiCell.ue21.cellularNic.channelModel[0] measuredSinrUl:vector ETV
+attr recordingmode vector
+attr source measuredSinrUl
+attr title "SINR measured at feedback computation, UL"
+attr unit dB
+vector 188 MultiCell.ue21.cellularNic.channelModel[0] measuredSinrDl:vector ETV
+attr recordingmode vector
+attr source measuredSinrDl
+attr title "SINR measured at feedback computation, DL"
+attr unit dB
+vector 189 MultiCell.eNodeB2.cellularNic.mac receivedPacketFromLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromLowerLayer
+vector 190 MultiCell.ue22.cellularNic.channelModel[0] measuredSinrUl:vector ETV
+attr recordingmode vector
+attr source measuredSinrUl
+attr title "SINR measured at feedback computation, UL"
+attr unit dB
+vector 191 MultiCell.ue22.cellularNic.channelModel[0] measuredSinrDl:vector ETV
+attr recordingmode vector
+attr source measuredSinrDl
+attr title "SINR measured at feedback computation, DL"
+attr unit dB
+0	0	0	0
+1	0	0	0
+2	0	0	0
+3	0	0	0
+4	0	0	0
+5	0	0	0
+6	0	0	0
+7	0	0	0
+8	0	0	0
+9	0	0	0
+10	0	0	0
+11	0	0	0
+12	0	0	0
+13	0	0	0
+13	30	0	1
+13	42	0.0000000792	0
+13	53	0.0000001292	1
+13	55	0.0000002724	0
+13	64	0.0000003224	1
+13	66	0.0000004208	0
+13	89	0.0000004708	1
+13	97	0.0000005148	0
+13	97	0.0000005148	1
+13	99	0.0000005588	0
+13	99	0.0000005588	1
+13	111	0.0000006028	0
+13	111	0.0000006028	1
+13	123	0.0000006372	0
+13	123	0.0000006372	1
+13	135	0.0000006812	0
+13	135	0.0000006812	1
+13	157	0.0000007252	0
+13	157	0.0000007252	1
+13	165	0.0000007692	0
+13	165	0.0000007692	1
+13	173	0.0000008132	0
+13	173	0.0000008132	1
+13	181	0.0000008572	0
+13	181	0.0000008572	1
+13	193	0.0000009012	0
+13	193	0.0000009012	1
+13	205	0.0000009452	0
+13	205	0.0000009452	1
+13	217	0.0000009892	0
+13	217	0.0000009892	1
+13	225	0.0000010332	0
+14	0	0	0
+15	0	0	0
+16	0	0	0
+17	0	0	0
+18	0	0	0
+19	0	0	0
+19	31	0	1
+19	43	0.0000000792	0
+19	52	0.0000001292	1
+19	54	0.0000002724	0
+19	65	0.0000003224	1
+19	67	0.0000004208	0
+19	84	0.0000004708	1
+19	96	0.0000005148	0
+19	96	0.0000005148	1
+19	98	0.0000005588	0
+19	98	0.0000005588	1
+19	110	0.0000006028	0
+19	110	0.0000006028	1
+19	122	0.0000006372	0
+19	122	0.0000006372	1
+19	134	0.0000006812	0
+19	134	0.0000006812	1
+19	156	0.0000007252	0
+19	156	0.0000007252	1
+19	164	0.0000007692	0
+19	164	0.0000007692	1
+19	172	0.0000008132	0
+19	172	0.0000008132	1
+19	180	0.0000008572	0
+19	180	0.0000008572	1
+19	192	0.0000009012	0
+19	192	0.0000009012	1
+19	204	0.0000009452	0
+19	204	0.0000009452	1
+19	216	0.0000009892	0
+19	216	0.0000009892	1
+19	224	0.0000010332	0
+20	0	0	0
+21	0	0	0
+22	0	0	0
+23	0	0	0
+24	0	0	0
+25	0	0	0
+26	0	0	0
+27	0	0	0
+28	0	0	0
+29	0	0	0
+30	0	0	0
+31	0	0	0
+32	0	0	0
+33	0	0	0
+34	0	0	0
+35	0	0	0
+36	0	0	1
+37	0	0	1
+38	0	0	2
+39	0	0	2
+40	14	0	0
+41	19	0	0
+42	22	0	0
+43	22	0	0
+44	23	0	0
+45	23	0	0
+46	30	0	736
+46	53	0.0000001292	1376
+46	64	0.0000003224	928
+46	89	0.0000004708	384
+46	90	0.0000004708	384
+46	91	0.0000004708	384
+46	93	0.0000004708	288
+46	108	0.0000005648	384
+46	120	0.0000006088	384
+46	132	0.0000006528	384
+46	150	0.0000006872	384
+46	151	0.0000006872	384
+46	152	0.0000006872	384
+46	190	0.0000008632	384
+46	202	0.0000009072	384
+46	214	0.0000009512	384
+47	30	0	0
+47	53	0.0000001292	0
+47	64	0.0000003224	0
+47	89	0.0000004708	0
+47	97	0.0000005148	4.4e-08
+47	99	0.0000005588	8.8e-08
+47	111	0.0000006028	1.32e-07
+47	123	0.0000006372	7.24e-08
+47	135	0.0000006812	7.24e-08
+47	157	0.0000007252	7.24e-08
+47	165	0.0000007692	8.2e-08
+47	173	0.0000008132	1.26e-07
+47	181	0.0000008572	1.7e-07
+47	193	0.0000009012	3.8e-08
+47	205	0.0000009452	3.8e-08
+47	217	0.0000009892	3.8e-08
+48	30	0	736
+48	53	0.0000001292	1376
+48	64	0.0000003224	928
+48	89	0.0000004708	384
+48	97	0.0000005148	384
+48	99	0.0000005588	384
+48	111	0.0000006028	288
+48	123	0.0000006372	384
+48	135	0.0000006812	384
+48	157	0.0000007252	384
+48	165	0.0000007692	384
+48	173	0.0000008132	384
+48	181	0.0000008572	384
+48	193	0.0000009012	384
+48	205	0.0000009452	384
+48	217	0.0000009892	384
+49	30	0	99
+49	53	0.0000001292	179
+49	64	0.0000003224	123
+49	89	0.0000004708	55
+49	97	0.0000005148	55
+49	99	0.0000005588	55
+49	111	0.0000006028	43
+49	123	0.0000006372	55
+49	135	0.0000006812	55
+49	157	0.0000007252	55
+49	165	0.0000007692	55
+49	173	0.0000008132	55
+49	181	0.0000008572	55
+49	193	0.0000009012	55
+49	205	0.0000009452	55
+49	217	0.0000009892	55
+50	30	0	0
+50	53	0.0000001292	0
+50	64	0.0000003224	0
+50	89	0.0000004708	0
+50	90	0.0000004708	1
+50	91	0.0000004708	2
+50	93	0.0000004708	3
+50	97	0.0000005148	2
+50	99	0.0000005588	1
+50	108	0.0000005648	2
+50	111	0.0000006028	1
+50	120	0.0000006088	2
+50	123	0.0000006372	1
+50	132	0.0000006528	2
+50	135	0.0000006812	1
+50	150	0.0000006872	2
+50	151	0.0000006872	3
+50	152	0.0000006872	4
+50	157	0.0000007252	3
+50	165	0.0000007692	2
+50	173	0.0000008132	1
+50	181	0.0000008572	0
+50	190	0.0000008632	1
+50	193	0.0000009012	0
+50	202	0.0000009072	1
+50	205	0.0000009452	0
+50	214	0.0000009512	1
+50	217	0.0000009892	0
+51	30	0	0
+51	53	0.0000001292	0
+51	64	0.0000003224	0
+51	89	0.0000004708	0
+51	90	0.0000004708	384
+51	91	0.0000004708	768
+51	93	0.0000004708	1056
+51	97	0.0000005148	672
+51	99	0.0000005588	288
+51	108	0.0000005648	672
+51	111	0.0000006028	384
+51	120	0.0000006088	768
+51	123	0.0000006372	384
+51	132	0.0000006528	768
+51	135	0.0000006812	384
+51	150	0.0000006872	768
+51	151	0.0000006872	1152
+51	152	0.0000006872	1536
+51	157	0.0000007252	1152
+51	165	0.0000007692	768
+51	173	0.0000008132	384
+51	181	0.0000008572	0
+51	190	0.0000008632	384
+51	193	0.0000009012	0
+51	202	0.0000009072	384
+51	205	0.0000009452	0
+51	214	0.0000009512	384
+51	217	0.0000009892	0
+52	31	0	736
+52	52	0.0000001292	1376
+52	65	0.0000003224	928
+52	84	0.0000004708	384
+52	85	0.0000004708	384
+52	86	0.0000004708	384
+52	88	0.0000004708	288
+52	109	0.0000005648	384
+52	121	0.0000006088	384
+52	133	0.0000006528	384
+52	153	0.0000006872	384
+52	154	0.0000006872	384
+52	155	0.0000006872	384
+52	191	0.0000008632	384
+52	203	0.0000009072	384
+52	215	0.0000009512	384
+53	31	0	0
+53	52	0.0000001292	0
+53	65	0.0000003224	0
+53	84	0.0000004708	0
+53	96	0.0000005148	4.4e-08
+53	98	0.0000005588	8.8e-08
+53	110	0.0000006028	1.32e-07
+53	122	0.0000006372	7.24e-08
+53	134	0.0000006812	7.24e-08
+53	156	0.0000007252	7.24e-08
+53	164	0.0000007692	8.2e-08
+53	172	0.0000008132	1.26e-07
+53	180	0.0000008572	1.7e-07
+53	192	0.0000009012	3.8e-08
+53	204	0.0000009452	3.8e-08
+53	216	0.0000009892	3.8e-08
+54	31	0	736
+54	52	0.0000001292	1376
+54	65	0.0000003224	928
+54	84	0.0000004708	384
+54	96	0.0000005148	384
+54	98	0.0000005588	384
+54	110	0.0000006028	288
+54	122	0.0000006372	384
+54	134	0.0000006812	384
+54	156	0.0000007252	384
+54	164	0.0000007692	384
+54	172	0.0000008132	384
+54	180	0.0000008572	384
+54	192	0.0000009012	384
+54	204	0.0000009452	384
+54	216	0.0000009892	384
+55	31	0	99
+55	52	0.0000001292	179
+55	65	0.0000003224	123
+55	84	0.0000004708	55
+55	96	0.0000005148	55
+55	98	0.0000005588	55
+55	110	0.0000006028	43
+55	122	0.0000006372	55
+55	134	0.0000006812	55
+55	156	0.0000007252	55
+55	164	0.0000007692	55
+55	172	0.0000008132	55
+55	180	0.0000008572	55
+55	192	0.0000009012	55
+55	204	0.0000009452	55
+55	216	0.0000009892	55
+56	31	0	0
+56	52	0.0000001292	0
+56	65	0.0000003224	0
+56	84	0.0000004708	0
+56	85	0.0000004708	1
+56	86	0.0000004708	2
+56	88	0.0000004708	3
+56	96	0.0000005148	2
+56	98	0.0000005588	1
+56	109	0.0000005648	2
+56	110	0.0000006028	1
+56	121	0.0000006088	2
+56	122	0.0000006372	1
+56	133	0.0000006528	2
+56	134	0.0000006812	1
+56	153	0.0000006872	2
+56	154	0.0000006872	3
+56	155	0.0000006872	4
+56	156	0.0000007252	3
+56	164	0.0000007692	2
+56	172	0.0000008132	1
+56	180	0.0000008572	0
+56	191	0.0000008632	1
+56	192	0.0000009012	0
+56	203	0.0000009072	1
+56	204	0.0000009452	0
+56	215	0.0000009512	1
+56	216	0.0000009892	0
+57	31	0	0
+57	52	0.0000001292	0
+57	65	0.0000003224	0
+57	84	0.0000004708	0
+57	85	0.0000004708	384
+57	86	0.0000004708	768
+57	88	0.0000004708	1056
+57	96	0.0000005148	672
+57	98	0.0000005588	288
+57	109	0.0000005648	672
+57	110	0.0000006028	384
+57	121	0.0000006088	768
+57	122	0.0000006372	384
+57	133	0.0000006528	768
+57	134	0.0000006812	384
+57	153	0.0000006872	768
+57	154	0.0000006872	1152
+57	155	0.0000006872	1536
+57	156	0.0000007252	1152
+57	164	0.0000007692	768
+57	172	0.0000008132	384
+57	180	0.0000008572	0
+57	191	0.0000008632	384
+57	192	0.0000009012	0
+57	203	0.0000009072	384
+57	204	0.0000009452	0
+57	215	0.0000009512	384
+57	216	0.0000009892	0
+58	33	0	58.309518948453
+58	38	0	58.309518948453
+59	34	0	36.05551275464
+59	39	0	85.440037453175
+60	35	0	320.44677724228
+60	40	0	232.63941646845
+61	36	0	309.55531834849
+61	41	0	210.79643163181
+62	44	0.0000001292	99
+62	57	0.0000003224	179
+62	68	0.0000004708	123
+62	101	0.0000005648	55
+62	113	0.0000006088	55
+62	125	0.0000006528	55
+62	137	0.0000006872	43
+62	159	0.0000007312	55
+62	167	0.0000007752	55
+62	175	0.0000008192	55
+62	183	0.0000008632	55
+62	195	0.0000009072	55
+62	207	0.0000009512	55
+62	219	0.0000009952	55
+62	227	0.0000010392	55
+62	233	0.0000010832	55
+63	44	0.0000001292	92
+63	57	0.0000003224	172
+63	68	0.0000004708	116
+63	101	0.0000005648	48
+63	113	0.0000006088	48
+63	125	0.0000006528	48
+63	137	0.0000006872	36
+63	159	0.0000007312	48
+63	167	0.0000007752	48
+63	175	0.0000008192	48
+63	183	0.0000008632	48
+63	195	0.0000009072	48
+63	207	0.0000009512	48
+63	219	0.0000009952	48
+63	227	0.0000010392	48
+63	233	0.0000010832	48
+64	45	0.0000001292	99
+64	56	0.0000003224	179
+64	69	0.0000004708	123
+64	100	0.0000005648	55
+64	112	0.0000006088	55
+64	124	0.0000006528	55
+64	136	0.0000006872	43
+64	158	0.0000007312	55
+64	166	0.0000007752	55
+64	174	0.0000008192	55
+64	182	0.0000008632	55
+64	194	0.0000009072	55
+64	206	0.0000009512	55
+64	218	0.0000009952	55
+64	226	0.0000010392	55
+64	232	0.0000010832	55
+65	45	0.0000001292	92
+65	56	0.0000003224	172
+65	69	0.0000004708	116
+65	100	0.0000005648	48
+65	112	0.0000006088	48
+65	124	0.0000006528	48
+65	136	0.0000006872	36
+65	158	0.0000007312	48
+65	166	0.0000007752	48
+65	174	0.0000008192	48
+65	182	0.0000008632	48
+65	194	0.0000009072	48
+65	206	0.0000009512	48
+65	218	0.0000009952	48
+65	226	0.0000010392	48
+65	232	0.0000010832	48
+66	48	0.0000001292	0
+67	48	0.0000001292	65535
+68	48	0.0000001292	0
+69	48	0.0000001292	0
+70	48	0.0000001292	0
+71	48	0.0000001292	0
+72	49	0.0000001292	0
+73	49	0.0000001292	65535
+74	49	0.0000001292	0
+75	49	0.0000001292	0
+76	49	0.0000001292	0
+77	49	0.0000001292	0
+78	60	0.0000003224	65535
+79	60	0.0000003224	0
+80	60	0.0000003224	0
+81	60	0.0000003224	0
+82	61	0.0000003224	65535
+83	61	0.0000003224	0
+84	61	0.0000003224	0
+85	61	0.0000003224	0
+86	72	0.0000004708	65535
+87	72	0.0000004708	8940
+88	72	0.0000004708	0.3725
+89	72	0.0000004708	1
+90	72	0.0000004708	3
+91	72	0.0000004708	65535
+92	72	0.0000004708	8940
+93	72	0.0000004708	0.3725
+94	72	0.0000004708	1
+95	72	0.0000004708	3
+96	72	0.0000004708	65535
+97	72	0.0000004708	8940
+98	72	0.0000004708	0.3725
+99	72	0.0000004708	3
+99	163	0.0000007312	1
+100	72	0.0000004708	65535
+101	72	0.0000004708	8940
+102	72	0.0000004708	0.3725
+103	72	0.0000004708	1
+104	72	0.0000004708	3
+105	73	0.0000004708	65535
+106	73	0.0000004708	8940
+107	73	0.0000004708	0.3725
+108	73	0.0000004708	1
+109	73	0.0000004708	3
+110	73	0.0000004708	65535
+111	73	0.0000004708	8940
+112	73	0.0000004708	0.3725
+113	73	0.0000004708	1
+114	73	0.0000004708	3
+115	73	0.0000004708	65535
+116	73	0.0000004708	8940
+117	73	0.0000004708	0.3725
+118	73	0.0000004708	3
+118	162	0.0000007312	1
+119	73	0.0000004708	65535
+120	73	0.0000004708	8940
+121	73	0.0000004708	0.3725
+122	73	0.0000004708	1
+123	73	0.0000004708	3
+124	104	0.0000005648	1
+124	116	0.0000006088	2
+124	128	0.0000006528	3
+125	104	0.0000005648	1
+125	116	0.0000006088	2
+125	128	0.0000006528	3
+126	105	0.0000005648	1
+126	117	0.0000006088	2
+126	129	0.0000006528	3
+127	105	0.0000005648	1
+127	117	0.0000006088	2
+127	129	0.0000006528	3
+128	140	0.0000006872	65535
+129	140	0.0000006872	8940
+130	140	0.0000006872	0.3725
+131	140	0.0000006872	1
+132	140	0.0000006872	3
+133	140	0.0000006872	65535
+134	140	0.0000006872	8940
+135	140	0.0000006872	0.3725
+136	140	0.0000006872	1
+137	140	0.0000006872	3
+138	140	0.0000006872	65535
+139	140	0.0000006872	8940
+140	140	0.0000006872	0.3725
+141	140	0.0000006872	3
+141	222	0.0000009952	1
+142	140	0.0000006872	65535
+143	140	0.0000006872	8940
+144	140	0.0000006872	0.3725
+145	140	0.0000006872	1
+146	140	0.0000006872	3
+147	141	0.0000006872	65535
+148	141	0.0000006872	8940
+149	141	0.0000006872	0.3725
+150	141	0.0000006872	1
+151	141	0.0000006872	3
+152	141	0.0000006872	65535
+153	141	0.0000006872	8940
+154	141	0.0000006872	0.3725
+155	141	0.0000006872	1
+156	141	0.0000006872	3
+157	141	0.0000006872	65535
+158	141	0.0000006872	8940
+159	141	0.0000006872	0.3725
+160	141	0.0000006872	3
+160	223	0.0000009952	1
+161	141	0.0000006872	65535
+162	141	0.0000006872	8940
+163	141	0.0000006872	0.3725
+164	141	0.0000006872	1
+165	141	0.0000006872	3
+166	162	0.0000007312	1
+166	170	0.0000007752	2
+166	178	0.0000008192	3
+167	162	0.0000007312	2.604e-07
+168	163	0.0000007312	1
+168	171	0.0000007752	2
+168	179	0.0000008192	3
+169	163	0.0000007312	2.604e-07
+170	186	0.0000008632	1
+170	198	0.0000009072	2
+170	210	0.0000009512	3
+171	186	0.0000008632	1
+171	198	0.0000009072	2
+171	210	0.0000009512	3
+172	187	0.0000008632	1
+172	199	0.0000009072	2
+172	211	0.0000009512	3
+173	187	0.0000008632	1
+173	199	0.0000009072	2
+173	211	0.0000009512	3
+174	222	0.0000009952	1
+174	230	0.0000010392	2
+174	236	0.0000010832	3
+175	222	0.0000009952	3.08e-07
+176	223	0.0000009952	1
+176	231	0.0000010392	2
+176	237	0.0000010832	3
+177	223	0.0000009952	3.08e-07
+178	242	0.001	0
+178	250	0.002	0
+178	266	0.003	0
+178	274	0.004	0
+178	282	0.005	0
+178	294	0.006	0
+178	306	0.007	0
+178	314	0.008	0
+178	330	0.009	0
+178	338	0.01	0
+178	346	0.011	0
+178	358	0.012	0
+179	242	0.001	0
+179	250	0.002	0
+179	266	0.003	0
+179	274	0.004	0
+179	282	0.005	0
+179	294	0.006	0
+179	306	0.007	0
+179	314	0.008	0
+179	330	0.009	0
+179	338	0.01	0
+179	346	0.011	0
+179	358	0.012	0
+180	243	0.001	0
+180	251	0.002	0
+180	267	0.003	0
+180	275	0.004	0
+180	283	0.005	0
+180	295	0.006	0
+180	307	0.007	0
+180	315	0.008	0
+180	331	0.009	0
+180	339	0.01	0
+180	347	0.011	0
+181	243	0.001	0
+181	251	0.002	0
+181	267	0.003	0
+181	275	0.004	0
+181	283	0.005	0
+181	295	0.006	0
+181	307	0.007	0
+181	315	0.008	0
+181	331	0.009	0
+181	339	0.01	0
+181	347	0.011	0
+182	258	0.002	52.918326323916
+182	322	0.008	52.903355314591
+183	258	0.002	64.918326323916
+183	322	0.008	64.903355314591
+184	259	0.002	1
+184	261	0.002	1
+184	323	0.008	1
+184	325	0.008	1
+185	260	0.002	61.075695358588
+185	324	0.008	61.060014113427
+186	260	0.002	73.075695358588
+186	324	0.008	73.060014113427
+187	262	0.002	29.429606098151
+187	326	0.008	29.429606098151
+188	262	0.002	41.429606098151
+188	326	0.008	41.429606098151
+189	263	0.002	1
+189	265	0.002	1
+189	327	0.008	1
+189	329	0.008	1
+190	264	0.002	31.103286903726
+190	328	0.008	31.103286903726
+191	264	0.002	43.103286903726
+191	328	0.008	43.103286903726
+178	370	0.013	0
+178	378	0.014	0
+178	394	0.015	0
+178	402	0.016	0
+178	410	0.017	0
+178	422	0.018	0
+179	370	0.013	0
+179	378	0.014	0
+179	394	0.015	0
+179	402	0.016	0
+179	410	0.017	0
+179	422	0.018	0
+180	359	0.012	0
+180	371	0.013	0
+180	379	0.014	0
+180	395	0.015	0
+180	403	0.016	0
+180	411	0.017	0
+180	423	0.018	0
+181	359	0.012	0
+181	371	0.013	0
+181	379	0.014	0
+181	395	0.015	0
+181	403	0.016	0
+181	411	0.017	0
+181	423	0.018	0
+182	386	0.014	52.88839006121
+183	386	0.014	64.88839006121
+184	387	0.014	1
+184	389	0.014	1
+185	388	0.014	61.044314967092
+186	388	0.014	73.044314967092
+187	390	0.014	29.429606098151
+188	390	0.014	41.429606098151
+189	391	0.014	1
+189	393	0.014	1
+190	392	0.014	31.103286903726
+191	392	0.014	43.103286903726
+178	434	0.019	0
+178	442	0.02	0
+178	458	0.021	0
+178	466	0.022	0
+178	474	0.023	0
+178	486	0.024	0
+178	498	0.025	0
+178	506	0.026	0
+178	522	0.027	0
+178	530	0.028	0
+178	538	0.029	0
+178	550	0.03	0
+178	562	0.031	0
+178	570	0.032	0
+178	586	0.033	0
+178	594	0.034	0
+178	602	0.035	0
+178	614	0.036	0
+179	434	0.019	0
+179	442	0.02	0
+179	458	0.021	0
+179	466	0.022	0
+179	474	0.023	0
+179	486	0.024	0
+179	498	0.025	0
+179	506	0.026	0
+179	522	0.027	0
+179	530	0.028	0
+179	538	0.029	0
+179	550	0.03	0
+179	562	0.031	0
+179	570	0.032	0
+179	586	0.033	0
+179	594	0.034	0
+179	602	0.035	0
+179	614	0.036	0
+180	435	0.019	0
+180	443	0.02	0
+180	459	0.021	0
+180	467	0.022	0
+180	475	0.023	0
+180	487	0.024	0
+180	499	0.025	0
+180	507	0.026	0
+180	523	0.027	0
+180	531	0.028	0
+180	539	0.029	0
+180	551	0.03	0
+180	563	0.031	0
+180	571	0.032	0
+180	587	0.033	0
+180	595	0.034	0
+180	603	0.035	0
+180	615	0.036	0
+181	435	0.019	0
+181	443	0.02	0
+181	459	0.021	0
+181	467	0.022	0
+181	475	0.023	0
+181	487	0.024	0
+181	499	0.025	0
+181	507	0.026	0
+181	523	0.027	0
+181	531	0.028	0
+181	539	0.029	0
+181	551	0.03	0
+181	563	0.031	0
+181	571	0.032	0
+181	587	0.033	0
+181	595	0.034	0
+181	603	0.035	0
+181	615	0.036	0
+182	450	0.02	52.873433269561
+182	514	0.026	52.858484941352
+182	578	0.032	52.843545078229
+183	450	0.02	64.873433269561
+183	514	0.026	64.858484941352
+183	578	0.032	64.843545078229
+184	451	0.02	1
+184	453	0.02	1
+184	515	0.026	1
+184	517	0.026	1
+184	579	0.032	1
+184	581	0.032	1
+185	452	0.02	61.028598072204
+185	516	0.026	61.012863580834
+185	580	0.032	60.997111644497
+186	452	0.02	73.028598072204
+186	516	0.026	73.012863580834
+186	580	0.032	72.997111644497
+187	454	0.02	29.429606098151
+187	518	0.026	29.429606098151
+187	582	0.032	29.429606098151
+188	454	0.02	41.429606098151
+188	518	0.026	41.429606098151
+188	582	0.032	41.429606098151
+189	455	0.02	1
+189	457	0.02	1
+189	519	0.026	1
+189	521	0.026	1
+189	583	0.032	1
+189	585	0.032	1
+190	456	0.02	31.103286903726
+190	520	0.026	31.103286903726
+190	584	0.032	31.103286903726
+191	456	0.02	43.103286903726
+191	520	0.026	43.103286903726
+191	584	0.032	43.103286903726
